@@ -25,15 +25,15 @@
 # BECOME MORE FAMILIAR WITH GITHUB).
 
 RESTORE = \
-'''"""(ENTER print(restore) TO SEE THIS MORE CLEARLY).
+'''"""    ENTER print(RESTORE) TO SEE THIS MORE CLEARLY.
 
-ENTERING exec(restore) FROM THE >>> PROMPT SHOULD DELETE ALL
-NON-DUNDER NAMES (NAMES THAT DO NOT BOTH BEGIN AND END WITH
-DOUBLE UNDERSCORE) EXCEPT restore.
+        ENTERING exec(RESTORE) FROM THE >>> PROMPT SHOULD DELETE
+        ALL NON-DUNDER NAMES (NAMES THAT DO NOT BOTH BEGIN AND
+        END WITH DOUBLE UNDERSCORE) EXCEPT RESTORE.
 """
 for name in dir():
     part = name.partition('__')
-    if name in ('restore', 'name', 'part'):
+    if name in ('RESTORE', 'name', 'part'):
         pass # name is being used in-loop: don't delete
     elif part[0]: # name does not begin with '__'
         exec('del ' + name)
