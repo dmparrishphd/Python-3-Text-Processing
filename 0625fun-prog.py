@@ -20,6 +20,13 @@
 #
 from functools import partial
 
+def genapply(iterable, function=ident): #DEPRECATED USE map
+    '''returns a generator that yield-s the results of applying
+    function to items of iterator.
+    '''
+    for item in iterable:
+        yield function(item)
+
 def do(function, *args, functions={}, **kwargs): ###
     try:
         function()
@@ -33,19 +40,14 @@ def fofnonetofofany(function): ###
         return function()
     return inner
 
-def un(function): ###
-    def logicalinversefunction(*args, **kwargs):
-        return not function(*args, **kwargs)
-    return logicalinversefunction
-
 def _compose(function, *functions): ###
     '''Returns a function that is the composition of the
     function arguments. The return performs the constituent
     function from right to left. Example: compose(hex, int)('3')
-    returns '0x60'
+    returns '0x3'
     '''
     if functions:
-        return lambda *args, **kwargs: function(compose(*functions)(*args, **kwargs))
+        return lambda *args, **kwargs: function(_compose(*functions)(*args, **kwargs))
     else:
         return lambda *args, **kwargs: function(*args, **kwargs)
 
@@ -62,7 +64,7 @@ def enclose(inner_string, left='', right=''): #.#
             >>> print(enclose('As you wish.', '``', "''"))
            ``As you wish.'' 
     '''
-    return affix(inner_string, left, right)
+    return affix(left, inner_string, right)
 
 def enclose_symmetric(inner_string, outer=''): #.#
     '''Returns a string that is the concatenation of outer,
@@ -81,6 +83,7 @@ def dunderfy(string): #.#
     '''
     return enclose_symmetric(string, '__')
 
+#TODO setattrs SEEMS NOT TO WORK IN CONJUNCTION WITH compose WHEN doc IS SPECIFIED.
 def setattrs(obj, **attributes): #.#
     for attribute in filter(lambda a: hasattr(obj, a), attributes):
         setattr(obj, dunderfy(attribute), attributes[attribute])
@@ -106,6 +109,8 @@ def compose(function, *functions, **attributes): #.#
             Returns the length of the decimal representation of the int argument.
     '''
     lam = _compose(function, *functions)
+    keys = tuple(attributes.keys())
+    print(*map(dunderfy, keys))
     setattrs(lam, **attributes)
     return lam
 

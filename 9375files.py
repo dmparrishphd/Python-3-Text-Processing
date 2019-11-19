@@ -16,11 +16,16 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
 
+
+def tail_is_non_ascii(file):
+    '''returns a bool indicating whether any of the remaining
+    bytes (i.e., the "tail") in the file (open for binary
+    reading) are non-ASCII bytes.
+    '''
+    print(phrase(words('''
+        **** WARNING **** tail_is_non_ascii: During tests, not
+        all files containing non-ASCII bytes were identified as
+        such.''')))
+    return bool(next_non_ascii_byte(fbytes(file)))

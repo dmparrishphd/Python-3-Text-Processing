@@ -36,7 +36,7 @@
 # Windows:
 # 
 # f = open('~/CODE/Py/3/TP/bootstrap.py'); exec(f.read()); f.close(); del(f)
-# f = open('p:/bootstrap.py');             exec(f.read()); f.close(); del(f)
+# f=open('p:/bootstrap.py'); exec(f.read()); f.close(); del(f)
 #
 # **** NOTE **** Previous attempts to bootstrap with e.g.:
 #
@@ -67,16 +67,29 @@ print(
     sep='\n', file=stderr)
 for TEMP_FILENAME in tuple(map(lambda filename: filename + '.py', '''
         0312imports
+
+        0156fun-prog
+        0312arith
+        0312characters
+        0312deques
+        0312integers
+        0312strings
+        0312triv
+        0312tuples
+        0390filters
+        0469ranges
+        0547strings
         0625files
         0625iterables
         0625maths
         0625fun-prog
+        0938maths
         1250files
+        1562string
         2500iterators
         2500iterables
         2500sequences
         3750sequences
-        5000characters
         5000maths
         5000restore
         5000string
@@ -95,7 +108,6 @@ for TEMP_FILENAME in tuple(map(lambda filename: filename + '.py', '''
         imports
         tuples
         search
-        iterables01
         iterables
         maths01
         generators02
@@ -123,12 +135,15 @@ for TEMP_FILENAME in tuple(map(lambda filename: filename + '.py', '''
         dates
         deco
         clu
+        8750bytes
         8750algebra
         8750hex
+        9375files
         '''.split())):
     TEMP_FULLNAME = TEMP_PATH + TEMP_FILENAME
     print(STDERR_PREFIX + TEMP_FULLNAME, file=stderr)
     with open(TEMP_PATH + TEMP_FILENAME) as TEMP_FILE:
+        print(STDERR_PREFIX, file=stderr)
         print(
             STDERR_PREFIX +
                     'bootstrap.py: Loading and exec-ing:',
@@ -137,41 +152,24 @@ for TEMP_FILENAME in tuple(map(lambda filename: filename + '.py', '''
         TEMP_TXT = TEMP_FILE.read()
         #print(TEMP_TXT, file=stderr)
         exec(TEMP_TXT)
-        print(STDERR_PREFIX, file=stderr)
 
 del(TEMP_FILE, TEMP_FILENAME, TEMP_FULLNAME, TEMP_PATH, TEMP_TXT) # should delete all variables created within this script
 
 print('''
-Text Processor
-Copyright (C) 2018 D. Michael Parrish
-
-This program is free software: you can redistribute it and/or
-modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation, either version 3 of
-the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public
-License along with this program.  If not, see
-<https://www.gnu.org/licenses/>.
-
-END OF COPYRIGHT NOTICE
-
 ###############################################################
 
                          TEXT PROCESSOR
 
-         When you have written a hundred or a thousand
-         words that discuss the problem,  then you are
-         ready to solve it.
-                          ---Charles H.  "Chuck" Moore
+                       Copyright (C) 2018*
+                       D. Michael Parrish
 
-###############################################################
-'''*0, file=stderr)
+
+         Once you have written a hundred or a thousand
+         words that discuss a problem,   you are ready
+         to solve it.
+                           ---Charles H. "Chuck" Moore
+
+###############################################################''', file=stderr)
 
 
 """

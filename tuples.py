@@ -18,15 +18,6 @@
 # END OF COPYRIGHT NOTICE
 #
 #
-def astuple(*args): ###
-    '''Combines the separate arguments into one tuple; returns
-    the tuple.'''
-    return args
-
-def entuple(arg): #.#
-    '''Wraps the single argument in a tuple. Returns a tuple whose single
-    element is arg.'''
-    return astuple(arg)
 
 def tuplefy(arg):
     '''If arg is a tuple, return it. If arg is a list, return

@@ -285,9 +285,6 @@ def genlimit(gen, items=1): #.#
     '''Deprecated. use quotan.'''
     return quota(gen, items)
 
-def genapply(iterable, function=ident):
-    for item in iterable:
-        yield function(item)
 
 ####
 
@@ -533,20 +530,22 @@ def genfuncvaluefromtpl(gens, fun=sum):
     '''
     return map(fun, zip(*gens))
 
-def genedges(gen, comp=lambda fst, sec: True):
-    '''STATUS: UNTESTED. Receive items from generator gen. Beginning with the
-    second item, compare the current item with the previous by applying the
-    function comp. Yields indices of items which are different from the
-    previous. Originally intended to produce an index of a file having sorted
-    data: corresponding indices would indicate the beginning of a sequence of
-    records that are meaningfully different from the previous set.'''
-    for item in gen:
-        prev = item
-        break
-    for item in enumerate(gen):
-        if comp(prev, second(item)):
-            yield 1 + first(item)
-        prev = second(item)
+def edges(iterator): #TAGS xor exclusive or difference
+    '''returns a map of indices of pairs of items from the
+    iterator argument where the members of the pairs are
+    unequal. The first pair has an index of zero. The last item
+    of the iterator is considered unequal to a hypothetical
+    element that comes after the last item of the iterator.
+            >>> tuple(edges((2,3,3,4,4,5)))
+            (0, 2, 4, 5)
+            >>> tuple(edges((42,)))
+            (0,)
+            >>> tuple(edges(()))
+            ()
+    '''
+    return map(first, filter(
+        lambda tpl: unstar(un(equal))(second(tpl)),
+        enumerate(running(chain(iterator, echoes(object(), 2))))))
 
 def genlag(iterable, n=2): # tag: running
     '''Deprecated. Use running.'''

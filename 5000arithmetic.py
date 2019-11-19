@@ -19,8 +19,19 @@
 #
 #
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
+def lsb(integer): #TAGS byte bits least significant byte
+    '''"least significant byte."
+    
+    For nonnegative int-s, returns an unsigned int that is
+    consistent with the lower eight bits of its base-2 (binary)
+    representation.
+    
+    FUTURE: returns values for negative int-s. **** DRAFT ****
+    help follows...  For integers in [-127, 0), returns an
+    unsigned int that is the two-s complement of the
+    corresponding integer value.
+    '''
+    assert isinstance(integer, int)
+    assert -1 < integer
+    return integer % 256
 

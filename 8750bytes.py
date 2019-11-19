@@ -16,11 +16,25 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
+
+
+def enumerate_non_ascii_bytes(byte_iterator):
+    '''returns a filter that returns duples containing the
+    relative position (beginning from zero) of the non-ASCII
+    bytes found in the byte_iterator argument.
+    '''
+    return filterbytag(
+        compose(
+            partial(less, bytes((0x7f,))),
+            second),
+        enumerate(byte_iterator))
+
+def next_non_ascii_byte(byte_iterator): #TAGS search
+    '''If there are no more non-ascii bytes in the byte_iterator
+    argument, returns (). Otherwise, returns a duple containing
+    the relative position of the non-ascci byte, and (a copy of)
+    the non-ascii byte itself.
+    '''
+    return next(enumerate_non_ascii_bytes(byte_iterator), ())
 

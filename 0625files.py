@@ -16,8 +16,67 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
+
+def loadentireaslines(filename):
+    '''returns the entire contents of the file, specified by
+    filename, as a tuple of lines.'''
+    with open(filename) as f:
+        return tuple(f)
+
+def apply(function, *args_and_kwargs):
+    assert False, 'STATUS: In Progress'
+    args = args_and_kwargs
+    function(*args_and)
+
+def halffapply(filename, function, binary=False):
+    '''returns a function of no variables that, when called,
+    opens the file specified by filename with the mode specified
+    by binary, applies function (a function of one file
+    variable, corresponding to filename), and returns the function
+    result.  Internally, the file mode is either "rb" or "r".
+    '''
+    def unevaluated():
+        with open(filename, 'rb' if binary else 'r') as file:
+            return function(file)
+    return unevaluated
+
+def fapply(filename, function, binary=False):
+    '''returns the result of function, which is applied to the
+    file whose name and mode is specified. Internally, the file
+    mode is either "rb" or "r".
+    '''
+    with open(filename, 'rb' if binary else 'r') as file:
+        return function(file)
+
+def halffmap(function, filenames, binary=False):
+    '''map-s files, specified by the iterable of filenames.
+    Internally, files are opened in read-binary or read-text
+    mode according to the binary argument.
+    '''
+    return map(
+        partial(
+            halffapply,
+            function=function,
+            binary=binary),
+        filenames)
+
+def fmap(function, filenames, binary=False):
+    '''map-s files, specified by the iterable of filenames.
+    Internally, files are opened in read-binary or read-text
+    mode according to the binary argument.
+    '''
+    return map(
+        partial(
+            fapply,
+            function=function,
+            binary=binary),
+        filenames)
+
+def fbytes(file):
+    '''returns an iterator through the remaining bytes of the
+    file open for binary reading, "rb".
+    '''
+    return iter(partial(fread, file), b'')
 
 def freadentire(filename): ###
     '''Return entire contents of file specified by the string
@@ -26,10 +85,10 @@ def freadentire(filename): ###
     with open(filename) as f:
         return f.read()
 
-def opena(filename): ###
+def opena(filename): #TAGS append file
     return open(filename, 'a')
 
-def fopenw(filename): ###
+def fopenw(filename): #TAGS write file
     return open(filename, 'w')
 
 def fread(file, n=1): ###
@@ -40,7 +99,7 @@ def freset(file, position=0): ###
     '''Sets (absolute) file position. Returns the file.'''
     file.seek(position);   return file
 
-def rewind(file): #.#
+def rewind(file): #TAGS seek
     '''Sets file position to beginning. Returns the file.'''
     return freset(file)
 

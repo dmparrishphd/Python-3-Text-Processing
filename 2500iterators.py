@@ -1,5 +1,5 @@
 # Text Processor
-# Copyright (C) 2018 D. Michael Parrish
+# Copyright (C) 2019 D. Michael Parrish
 # 
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -24,4 +24,10 @@ def NoMore(*args, **kwargs):
 
     HISTORY 2018-12-06 formerly accepted no arguments.'''
     assert False, 'Do not call (see help).'
+
+def steady(value=1): #TAGS repeat constant
+    '''Returns an iterator that produces value indefinitely.
+    HISTORY: 2018--5-14: changed sentinel from None to NoMore;
+    2018-04-11: was generator that yielded x indefinitely.'''
+    return iter(constant(value), NoMore)
 

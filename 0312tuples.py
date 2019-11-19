@@ -1,5 +1,5 @@
 # Text Processor
-# Copyright (C) 2019 D. Michael Parrish
+# Copyright (C) 2018 D. Michael Parrish
 # 
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -19,8 +19,13 @@
 #
 #
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
+def astuple(*args): ###
+    '''Combines the separate arguments into one tuple; returns
+    the tuple.'''
+    return args
+
+def entuple(arg): #.#
+    '''Wraps the single argument in a tuple. Returns a tuple whose single
+    element is arg.'''
+    return astuple(arg)
 

@@ -68,9 +68,6 @@ def fnzipc(compounditerable): ###
 def fnis(a, b): ###
     return a is b
 
-def ident(x): ###
-    return x
-
 def fnnot(x): ###
     'returns (not x)---function version of keyword not'
     return not x
@@ -86,24 +83,6 @@ def alwaysFalse(*args, **kwargs): ###
 
 def alwaysneg1(*args, **kwargs): ###
     return -1
-
-def less(x, y=0): ###
-    '''Returns whether x < y. HISTORY 2018-11-13: defined
-    default value for y (arg 1).'''
-    return x < y
-
-greater = argswap(less)
-
-def equal(*obj): ###
-    '''HISTORY 2018-05-10: modified to accept any number of
-    values; 2018-05-07: corrected logic for case of more than
-    two arguments.'''
-    if len(obj) < 2:
-        return True
-    elif len(obj) == 2:
-        return obj[0] == obj[1]
-    else:
-        return equal(obj[0], obj[1]) and equal(*obj[1:])
 
 def lessorequal(x, y):
     return less(x, y) or equal(x, y)

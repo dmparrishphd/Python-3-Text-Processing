@@ -1,5 +1,5 @@
 # Text Processor
-# Copyright (C) 2019 D. Michael Parrish
+# Copyright (C) 2018 D. Michael Parrish
 # 
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -16,11 +16,11 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
 
+
+LF = '\n' # ord('\n') == 10
+NEWLINE = LF #DEPRECATED USE LF
+TAB = '\t'
+SPACE = ' '
+COMMA = ','

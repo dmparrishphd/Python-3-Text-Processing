@@ -37,9 +37,6 @@ def idivup(dividend, divisor):
     dm = idivmod(dividend, divisor)
     return first(dm) + bool(second(dm))
 
-def add(x, y): ###
-    return x + y
-
 def rangestoplacevalue(rngs):
     '''Given a sequence of integers representing the range of values for a
     variable-base number, returns the corresponding place values.

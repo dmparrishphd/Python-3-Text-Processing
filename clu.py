@@ -23,16 +23,19 @@
             u:\pyu COMMANDNAME "* [$infile0[$infile1[...]]
             [$outfile0[$outfile1[...]] [arg2 [arg3 [...]]]]]*
             [key0 value0 [key1 value1]]"
+
+    Example:
+
+            u:pyu middled "* r filename** line 42 lines 16"
 '''
 def decoclu(function):
-    '''Given a function of a tuple of input (read-mode) text files, a tuple
-    of output (write-mode) text files, zero or more positional
-    arguments, and zero or more keyword arguments, returns a
-    function of a string. The actual argument of the call of
-    such a function has the form:
-        {sep-outer}{minor-sep}{sepouter}
-
-        '''
+    '''Given a function of a tuple of input (read-mode) text
+    files, a tuple of output (write-mode) text files, zero or
+    more positional arguments, and zero or more keyword
+    arguments, returns a function of a string. The actual
+    argument of the call of such a function has the form:
+    {sep-outer}{minor-sep}{sepouter}
+    '''
     return fnstrstofnstr(fnargkwargtofnstrs(decoopen(function)))
 
 decoklu = lambda function: fnfndargkwatofnstrstr(decoopend(function))

@@ -51,6 +51,12 @@ class files(tuple):
         self.close()
         return False
 
+def fdump(filename):
+    '''print-s the entire contents of the file specified by name.
+    '''
+    with open(filename) as f:
+        print(f.read())
+
 def fwords(file):
     '''Returns an iterator over the remaining words in a file.
     If the file position is at the middle of a word, the
@@ -93,7 +99,13 @@ def fcharactermap(file):
     and forth toward and away from the edge of a cliff: as long
     as you don't go off the edge, you can continue to walk back
     and forth.'''
-    return quota(map(fread, steady(file)), n=None, criterion=bool)
+    #OLD return quota(map(fread, steady(file)), n=None, criterion=bool)
+    while True:
+        c = fread(file)
+        if c:
+            yield c
+        else:
+            return
 
 def filestream(file, blocks=iter, parse=towords):
     '''Returns a map of the contents of the file. The default
@@ -678,8 +690,31 @@ def writeskip(f, lst=[''], skip=0):
         n = n + f.write(item)
     return n
 
-def fcharacterset(f):
-    return set(rewind(f).read())
+def fcharacterset(file, seek=rewind):
+    '''returns a frozenset of the characters found in the tail
+    of the file.  The seek argument controls how much of file is
+    used to build the character set. By default, the entire file
+    is used.  Alternatively, a function may be specified which
+    returns the file (optionally after mutating the file
+    position). Common values for seek might include ident (no
+    mutation of file position) and compose(rest, rewind)
+    (rewind, then skip first line, assuming a text file).
+
+    HISTORY:
+
+            2019-07-10:
+
+                    formerly returned a set rather than a
+                    frozenset.
+
+                    formerly read the entire file before
+                    computing the character set. now reads one
+                    character at a time.
+    '''
+    seek(file);   return frozenset(fcharactermap(file))
+
+def fcharacterset(file, seek=rewind):
+    cs = fcharacterset(file, seek=seek)
 
 def fworditer(f):
     return iter(partial(fgetword, f), '')

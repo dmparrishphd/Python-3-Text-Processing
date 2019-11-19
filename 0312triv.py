@@ -1,5 +1,5 @@
-# Text Processor
-# Copyright (C) 2019 D. Michael Parrish
+# Text Processor: Trivial Functions
+# Copyright (C) 2018 D. Michael Parrish
 # 
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -16,11 +16,21 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
+
+
+def equal(*obj): ###
+    '''HISTORY 2018-05-10: modified to accept any number of
+    values; 2018-05-07: corrected logic for case of more than
+    two arguments.'''
+    if len(obj) < 2:
+        return True
+    elif len(obj) == 2:
+        return obj[0] == obj[1]
+    else:
+        return equal(obj[0], obj[1]) and equal(*obj[1:])
+
+def ident(x):
+    '''returns the single argument.'''
+    return x
 

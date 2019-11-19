@@ -29,26 +29,6 @@ def popleft(popleftable):
     assert popleftable.popleft
     return popleftable if not popleftable else (popleftable.popleft(), popleftable)[1]
 
-def shiftinv(deq, value): ### tag: ASL left shift <<
-    '''Modifies *IN PLACE* the deque deq by appending the value,
-    then removing the left item. Returns the modified deque.
-    HISTORY: 2018-10-05 formerly would fail if deq had no
-    elements.'''
-    assert deq.append and deq.popleft
-    return popleft(append(deq, value))
-
-def shiftin(deq, iterable): ### tag: ASL left shift <<
-    '''Returns a modified *IN PLACE* version of deque deq, where
-    items have been shifted to the left, the item origially at
-    the initial position has been removed, and a new item (if
-    available from iterable) has been appended. c.f.
-    deque.extend. TO DO: when shiftout needed: refactor to
-    shift, shiftin, shiftout.'''
-    for item in iterable:
-        shiftinv(deq, item)
-        break
-    return deq
-
 def recent(iterator, n=1):
     '''Exhausts iterator. The lesser of n or the number of items
     available in the iterator are returned as a tuple.'''

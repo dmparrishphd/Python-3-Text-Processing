@@ -16,11 +16,11 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
 
-from collections import deque
-from functools import reduce, partial
-from itertools import chain
-from math import floor
+
+
+ifloor = compose(int, floor)
+ifloor.__doc__ = 'returns the floor of the argument, as an int.'
+ifloor.__name__= 'ifloor'
+#TODO SHOULD BE ABLE TO SPECIFY doc AND name FROM WITHING CALL TO compose.
 

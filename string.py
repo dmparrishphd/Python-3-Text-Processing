@@ -33,25 +33,6 @@ def flag_all(function, iterable):
     '''
     return map(partial(flag, function), iterable)
 
-def chrs(character_code_iterable):
-    '''Returns a map that produces the characters whose
-    character codes are produced by the argument.'''
-    return map(chr, character_code_iterable)
-
-def whitespaces(character_code_iterable=range(128)):
-    '''Returns a frozenset of whitespace characters whose
-    character codes are produced by the argument (defaults to
-    ASCII range). Whitespace is defind by str.strip.
-    '''
-    return frozenset(
-        filter(
-            lambda c: c != c.strip(), # *
-            chrs(character_code_iterable)))
-    # * GUARANTEED: len(c) == 1
-
-
-WHITESPACES_ASCII = whitespaces()
-
 def strfindamong(string, iterable=WHITESPACES_ASCII):
     '''Similar to str.find, except that a search is conducted
     for any substrings of the iterable argument. Example:

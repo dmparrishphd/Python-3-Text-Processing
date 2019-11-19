@@ -16,8 +16,20 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
+
+
+
+def tuplefilter(function_or_None, iterable):
+    '''Shorthand for tuple(filter(...))'''
+    return tuple(filter(function_or_None, iterable))
+
+def tuplemap(function, *iterables):
+    '''Shorthand for tuple(map(...))'''
+    return tuple(map(function, *iterables))
+
+def tuplezip(*iterables):
+    '''Shorthand for tuple(zip(...))'''
+    return tuple(zip(*iterables))
 
 def maxlen(compound_iterable):
     '''Returns the len of the longest inner iterable in the

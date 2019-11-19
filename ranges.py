@@ -16,8 +16,9 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
+
+
+
 rangeof = compose(range, len)
 rangeof.__doc__ = ('Returns a range object over the indices of'
     'the argument.')

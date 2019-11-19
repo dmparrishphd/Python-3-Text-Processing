@@ -32,11 +32,11 @@ printerr('characters.py (A)')
 def allcharacters(among=CHARACTER_SET_ORDS_STDOUT, file=stdout):
     '''Returns a dict of character vs. Unicode code point. All
     code points are considered. Side effect: valid characters
-    are print-ed to standard out.'''
+    are print-ed to standard error.'''
     def ch(u):
         try:
             c = chr(u)
-            print(c if c else '', end='')
+            printerr(c if c else '', end='')
         except:
             c = ''
         return c

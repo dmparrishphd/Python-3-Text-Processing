@@ -76,12 +76,18 @@ def tablewriterow(f, iterable, sep=' '):
     (could be tuple, iterator, etc.).'''
     f.write(strcat(iterable, sep) + '\n')
 
-def tablewrite(f, rowiter, sep=' '):
+def tableaslines(rows, sep=SPACE):
+    '''The primary argument is a table (row iterator) where ****
+    ALL TABLE CELLS ARE STRINGS ****'''
+    return map(compose(line, partial(str.join, sep)), rows)
+
+def tablewrite(f, rows, sep=' '):
     '''write-s every row produced by the iterable rowiter to
     file f open for writing. Fields are separated by sep. Data
     for one row is accessed via the items produced bu rowiter
     '''
-    waste(map(partial(tablewriterow, f, sep=sep), rowiter))
+    waste(map(f.write, tableaslines(rows, sep)))
+    waste(map(partial(tablewriterow, f, sep=sep), rows))
 
 def tablekeys(rows, column):
     return set(tuple(partial(tablecolumn, n=column)(rows)))
@@ -331,4 +337,5 @@ class crosstable:
         xt = crosstable(record_keys, category_keys)
         xt.populate(tablecolumns(tablerowiter(iter(rewind(file))), xyz))
         return xt
+
 

@@ -16,8 +16,18 @@
 # <https://www.gnu.org/licenses/>.
 #
 # END OF COPYRIGHT NOTICE
-#
-#
+
+
+
+def less(x, y=0): ###
+    '''Returns whether x < y. HISTORY 2018-11-13: defined
+    default value for y (arg 1).'''
+    return x < y
+
+def greater(x, y=0): ###
+    '''Returns whether x > y.
+    '''
+    return x > y
 
 def NaN(): ###
     '''Returns the float-ing point value NaN.'''

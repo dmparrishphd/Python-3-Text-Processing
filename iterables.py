@@ -349,18 +349,6 @@ def recycle(sequence):
     '''
     return map(sequence.__getitem__, cycle(len(sequence)))
 
-def tuplefilter(function_or_None, iterable):
-    '''Shorthand for tuple(filter(...))'''
-    return tuple(filter(function_or_None, iterable))
-
-def tuplemap(function, *iterables):
-    '''Shorthand for tuple(map(...))'''
-    return tuple(map(function, *iterables))
-
-def tuplezip(*iterables):
-    '''Shorthand for tuple(zip(...))'''
-    return tuple(zip(*iterables))
-
 def _zip_lazy(iterator_of_sequences,
         ragged=False, allow_skipping=False):
     '''FUTURE: ragged and allow_skipping provide for

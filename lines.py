@@ -23,6 +23,12 @@
 #       a line is a string having exactly one newline character;
 #       the newline character is the final character of the string.
 
+
+
+'''
+def freadeveryline(file) #DELETED USE tuple(file)
+'''
+
 def fread_previous_line(f, n=1024):
     '''Returns the line found before the current position of
     file f. On return, the file position of f is set *IN PLACE*
@@ -72,19 +78,7 @@ def PLACEHOLDER(): # def printlines
     pass
 printlines = partial(print, sep='', end='')
 
-def isline(string):
-    '''Returns a bool that tells whether the argument is a
-    string whose last character is the newline character.'''
-    if (not string) or (not isinstance(string, str)):
-        return False
-    return string[-1] == NEWLINE
 
-def line(string):
-    '''Returns the string argument if it already ends in
-    new-line. Otherwise returns a modified copy of the string
-    argument which consists of the concatenation of the string
-    argument and newline.'''
-    return string + ('' if isline(string) else NEWLINE)
 
 strasline = line #DEPRECATED use line
 
